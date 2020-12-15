@@ -39,6 +39,8 @@ class WithBreadcrumbAction @Inject()(implicit ec: ExecutionContext) {
               request.personDetails,
               request.trustedHelper,
               request.profile,
+              request.groupId,
+              request.credId,
               request.unreadMessageCount,
               request.activeTab,
               Some(breadcrumb),

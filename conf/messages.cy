@@ -495,6 +495,23 @@ global.page.not.found.error.contact=Os yw’r cyfeiriad gwe yn gywir neu os ydyc
 global.page.not.found.error.contact.link.text=cysylltwch â Gwasanaeth Cwsmeriaid Cymraeg CThEM
 global.page.not.found.error.contact.link=https://www.gov.uk/government/organisations/hm-revenue-customs/contact/welsh-language-helplines
 
+#
+# SA Successfully Enrolled
+#
+title.successful_enrolment.h1 = Gallwch nawr gael at eich cyfrif Hunanasesiad
+label.start_using_tax_scheme = Gallwch ddechrau defnyddio’r dreth hon neu’r cynllun hwn ar unwaith.
+
+#
+# Try Pin In Post
+#
+title.try_pin_in_post.h1 = Gwneud cais i gael at eich cyfrif Hunanasesiad
+label.try_pin_in_post.you_can = Gallwch
+label.try_pin_in_post.confirm_identity = gadarnhau pwy ydych ar-lein
+label.try_pin_in_post.up_to_10_days = i gael mynediad at eich cyfrif Hunanasesiad ar unwaith, neu gallwch ofyn am gael cod cychwyn drwy’r post.
+label.try_pin_in_post.if_you_choose_to_receive = Os dewiswch gael eich cod cychwyn drwy’r post, ni fyddwch yn gallu mynd yn ôl a chadarnhau pwy ydych ar-lein.
+label.try_pin_in_post.request_activation_code_in_post. = Gwneud cais i gael at eich cyfrif Hunanasesiad
+label.try_pin_in_post.you_can_request_a_code = Gallwch ofyn am gael cod cychwyn drwy’r post. Bydd hyn yn cymryd hyd at 10 diwrnod.
+
 
 label.access_your_self_assessment=Cael at eich cyfrif Hunanasesiad
 

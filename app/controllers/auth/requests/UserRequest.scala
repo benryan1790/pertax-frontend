@@ -33,6 +33,8 @@ final case class UserRequest[+A](
   personDetails: Option[PersonDetails],
   trustedHelper: Option[TrustedHelper],
   profile: Option[String],
+  groupId: String,
+  credId: String,
   unreadMessageCount: Option[Int] = None,
   activeTab: Option[ActiveTab] = None,
   breadcrumb: Option[Breadcrumb] = None,

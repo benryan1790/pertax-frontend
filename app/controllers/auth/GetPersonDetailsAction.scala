@@ -49,24 +49,23 @@ class GetPersonDetailsAction @Inject()(
     populatingUnreadMessageCount()(request).flatMap { messageCount =>
       if (!request.uri.contains("/signout")) {
         getPersonDetails()(request).map { a =>
-          a.fold(
-            Left(_),
+          a.map(
             pd =>
-              Right(
-                UserRequest(
-                  request.nino,
-                  request.retrievedName,
-                  request.saUserType,
-                  request.credentials,
-                  request.confidenceLevel,
-                  pd,
-                  request.trustedHelper,
-                  request.profile,
-                  messageCount,
-                  request.activeTab,
-                  request.breadcrumb,
-                  request.request
-                )
+              UserRequest(
+                request.nino,
+                request.retrievedName,
+                request.saUserType,
+                request.credentials,
+                request.confidenceLevel,
+                pd,
+                request.trustedHelper,
+                request.profile,
+                request.groupId,
+                request.credId,
+                messageCount,
+                request.activeTab,
+                request.breadcrumb,
+                request.request
             )
           )
         }
@@ -82,6 +81,8 @@ class GetPersonDetailsAction @Inject()(
               None,
               request.trustedHelper,
               request.profile,
+              request.groupId,
+              request.credId,
               messageCount,
               request.activeTab,
               request.breadcrumb,

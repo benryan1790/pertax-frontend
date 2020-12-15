@@ -31,6 +31,9 @@ POST        /personal-account/self-assessment/do-you-know-user-id               
 GET         /personal-account/self-assessment/sign-in-again                            controllers.SaWrongCredentialsController.signInAgain
 GET         /personal-account/self-assessment/need-to-reset-password                   controllers.SaWrongCredentialsController.needToResetPassword
 GET         /personal-account/self-assessment/find-your-user-id                        controllers.SaWrongCredentialsController.findYourUserId
+GET         /personal-account/self-assessment/successfully-enrolled                    controllers.SAEnrolmentSuccessController.onPageLoad
+GET         /personal-account/self-assessment/try-pin-in-post                          controllers.TryPinInPostController.onPageLoad
+POST        /personal-account/self-assessment/try-pin-in-post                          controllers.TryPinInPostController.onSubmit
 
 GET         /personal-account/lang/enGb                                                controllers.LanguageSwitchController.enGb()
 GET         /personal-account/lang/cyGb                                                controllers.LanguageSwitchController.cyGb()

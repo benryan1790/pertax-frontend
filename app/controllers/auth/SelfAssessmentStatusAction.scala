@@ -71,6 +71,8 @@ class SelfAssessmentStatusAction @Inject()(
           None,
           request.trustedHelper,
           request.profile,
+          request.groupIdentifier,
+          request.credId,
           None,
           None,
           None,

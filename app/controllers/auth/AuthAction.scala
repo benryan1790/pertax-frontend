@@ -81,22 +81,23 @@ class AuthActionImpl @Inject()(
           Retrievals.confidenceLevel and
           Retrievals.name and
           Retrievals.trustedHelper and
-          Retrievals.profile) {
+          Retrievals.profile and
+          Retrievals.groupIdentifier) {
 
-        case _ ~ Some(Individual) ~ _ ~ _ ~ (Some(CredentialStrength.weak) | None) ~ _ ~ _ ~ _ ~ _ =>
+        case _ ~ Some(Individual) ~ _ ~ _ ~ (Some(CredentialStrength.weak) | None) ~ _ ~ _ ~ _ ~ _ ~ _ =>
           upliftCredentialStrength
 
-        case _ ~ Some(Individual) ~ _ ~ _ ~ _ ~ LT200(_) ~ _ ~ _ ~ _ =>
+        case _ ~ Some(Individual) ~ _ ~ _ ~ _ ~ LT200(_) ~ _ ~ _ ~ _ ~ _ =>
           upliftConfidenceLevel(request)
 
-        case _ ~ Some(Organisation | Agent) ~ _ ~ _ ~ _ ~ LT200(_) ~ _ ~ _ ~ _ =>
+        case _ ~ Some(Organisation | Agent) ~ _ ~ _ ~ _ ~ LT200(_) ~ _ ~ _ ~ _ ~ _ =>
           upliftConfidenceLevel(request)
 
-        case _ ~ Some(Organisation | Agent) ~ _ ~ _ ~ (Some(CredentialStrength.weak) | None) ~ _ ~ _ ~ _ ~ _ =>
+        case _ ~ Some(Organisation | Agent) ~ _ ~ _ ~ (Some(CredentialStrength.weak) | None) ~ _ ~ _ ~ _ ~ _ ~ _ =>
           upliftCredentialStrength
 
         case nino ~ _ ~ Enrolments(enrolments) ~ Some(credentials) ~ Some(CredentialStrength.strong) ~ GT100(
-              confidenceLevel) ~ name ~ trustedHelper ~ profile =>
+              confidenceLevel) ~ name ~ trustedHelper ~ profile ~ Some(groupIdentifier) =>
           val trimmedRequest: Request[A] = request
             .map {
               case AnyContentAsFormUrlEncoded(data) =>
@@ -126,6 +127,8 @@ class AuthActionImpl @Inject()(
               Name(Some(helper.principalName), None)))),
             trustedHelper,
             addRedirect(profile),
+            groupIdentifier,
+            credentials.providerId,
             enrolments,
             trimmedRequest
           )

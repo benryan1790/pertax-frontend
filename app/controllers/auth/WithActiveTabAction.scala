@@ -39,6 +39,8 @@ class WithActiveTabAction @Inject()(implicit ec: ExecutionContext) {
               request.personDetails,
               request.trustedHelper,
               request.profile,
+              request.groupId,
+              request.credId,
               request.unreadMessageCount,
               Some(currentActiveTab),
               request.breadcrumb,

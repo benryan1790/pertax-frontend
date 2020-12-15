@@ -492,6 +492,24 @@ global.page.not.found.error.contact=If the web address is correct or you selecte
 global.page.not.found.error.contact.link.text=contact the Income Tax helpline
 global.page.not.found.error.contact.link=https://www.gov.uk/government/organisations/hm-revenue-customs/contact/income-tax-enquiries-for-individuals-pensioners-and-employees
 
+#
+# SA Successfully Enrolled
+#
+title.successful_enrolment.h1 = You now have access to Self Assessment
+label.start_using_tax_scheme = You can start using this tax or scheme straight away.
+
+#
+# Try Pin In Post
+#
+title.try_pin_in_post.h1 = Request access to Self Assessment
+label.try_pin_in_post.you_can = You can
+label.try_pin_in_post.confirm_identity = confirm your identity online
+label.try_pin_in_post.up_to_10_days = to get access to Self Assessment straight away, or you can request an activation code in the post. This will take up to 10 days.
+label.try_pin_in_post.if_you_choose_to_receive = If you choose to receive your activation code by post, you will not be able to go back and confirm your identity online.
+label.try_pin_in_post.request_activation_code_in_post. = Request an activation code in the post
+label.try_pin_in_post.you_can_request_a_code = You can request an activation code in the post. This will take up to 10 days.
+
+
 label.access_your_self_assessment=Access your Self Assessment
 
 title.signed_in_wrong_account.h1=You are not signed in to the right account

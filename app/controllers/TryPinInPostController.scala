@@ -16,6 +16,7 @@
 
 package controllers
 
+import config.ConfigDecorator
 import controllers.auth.{AuthJourney, WithBreadcrumbAction}
 import error.ErrorRenderer
 import javax.inject.Inject
@@ -23,30 +24,48 @@ import models.{NonFilerSelfAssessmentUser, SelfAssessmentUser}
 import play.api.Logger
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import services.EnrolForSAService
-import uk.gov.hmrc.play.bootstrap.controller.FrontendController
+import uk.gov.hmrc.renderer.TemplateRenderer
+import util.LocalPartialRetriever
+import views.html.selfassessment.TryPinInPost
 
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, Future}
 
-class EnrolForSAController @Inject()(
+class TryPinInPostController @Inject()(
   cc: MessagesControllerComponents,
+  config: ConfigDecorator,
   authJourney: AuthJourney,
   withBreadcrumbAction: WithBreadcrumbAction,
+  tryPinInPostView: TryPinInPost,
   enrolForSAService: EnrolForSAService,
-  errorRenderer: ErrorRenderer)(implicit ec: ExecutionContext)
+  errorRenderer: ErrorRenderer)(
+  implicit ec: ExecutionContext,
+  partialRetriever: LocalPartialRetriever,
+  configDecorator: ConfigDecorator,
+  templateRenderer: TemplateRenderer)
     extends PertaxBaseController(cc) {
 
-  def enrolAndActivate(): Action[AnyContent] =
+  val pinAndPostFeatureToggle: Boolean = config.removePipJourneyEnabled
+
+  def onPageLoad: Action[AnyContent] =
+    (authJourney.authWithPersonalDetails andThen withBreadcrumbAction.addBreadcrumb(baseBreadcrumb)).async {
+      implicit request =>
+        if (pinAndPostFeatureToggle) {
+          Future.successful(Ok(tryPinInPostView()))
+        } else {
+          Future.successful(Redirect(controllers.routes.HomeController.index()))
+        }
+    }
+
+  def onSubmit: Action[AnyContent] =
     (authJourney.authWithPersonalDetails andThen withBreadcrumbAction.addBreadcrumb(baseBreadcrumb)).async {
       implicit request =>
         request.saUserType match {
           case saUser: SelfAssessmentUser =>
-            enrolForSAService.enrolAndActivate(saUser.saUtr.utr, request.groupId, request.credId)
+            enrolForSAService.enrolOnly(saUser.saUtr.utr, request.groupId, request.credId)
           case NonFilerSelfAssessmentUser => {
             Logger.warn("User had no sa account when one was required")
             errorRenderer.futureError(INTERNAL_SERVER_ERROR)
           }
         }
-
     }
-
 }

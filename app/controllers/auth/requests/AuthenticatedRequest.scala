@@ -47,6 +47,8 @@ case class AuthenticatedRequest[A](
   name: Option[UserName],
   trustedHelper: Option[TrustedHelper],
   profile: Option[String],
+  groupIdentifier: String,
+  credId: String,
   enrolments: Set[Enrolment],
   request: Request[A])
     extends WrappedRequest[A](request)

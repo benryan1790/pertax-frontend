@@ -247,6 +247,9 @@ class ConfigDecorator @Inject()(
   lazy val getNinoFromCID =
     runModeConfiguration.getOptional[Boolean]("feature.get-nino-from-cid.enabled").getOrElse(false)
 
+  lazy val removePipJourneyEnabled =
+    runModeConfiguration.getOptional[Boolean]("feature.remove-pin-in-post-journey.enabled").getOrElse(false)
+
   val enc = URLEncoder.encode(_: String, "UTF-8")
 
   lazy val assetsPrefix = runModeConfiguration.get[String](s"assets.url") + runModeConfiguration
@@ -266,7 +269,6 @@ class ConfigDecorator @Inject()(
 
   lazy val saPartialReturnLinkText = "Back to account home"
 
-  lazy val pertaxFrontendHost: String = servicesConfig.getString("pertax-frontend.host")
   lazy val upliftCompletionUrl: String = s"$pertaxFrontendHost/"
   lazy val upliftFailureUrl: String = s"$pertaxFrontendHost/"
   lazy val taxEnrolmentsBaseUrl: String = servicesConfig.baseUrl("tax-enrolments")
