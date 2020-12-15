@@ -265,6 +265,16 @@ class ConfigDecorator @Inject()(
   lazy val editAddressTtl: Int = runModeConfiguration.getOptional[Int]("mongodb.editAddressTtl").getOrElse(0)
 
   lazy val saPartialReturnLinkText = "Back to account home"
+
+  lazy val pertaxFrontendHost: String = servicesConfig.getString("pertax-frontend.host")
+  lazy val upliftCompletionUrl: String = s"$pertaxFrontendHost/"
+  lazy val upliftFailureUrl: String = s"$pertaxFrontendHost/"
+  lazy val taxEnrolmentsBaseUrl: String = servicesConfig.baseUrl("tax-enrolments")
+  lazy val enrolForSaUrl: String = s"$taxEnrolmentsBaseUrl/tax-enrolments/groups/"
+
+  lazy val ivUpliftUrl: String =
+    s"$identityVerificationHost/mdtp/uplift?origin=pta-sa&confidenceLevel=200&completionURL=$upliftCompletionUrl&failureURL=$upliftFailureUrl"
+
 }
 
 trait TaxcalcUrls {
